@@ -1,0 +1,91 @@
+
+body {
+    font-family: Arial, sans-serif, serif;
+    animation: 10000ms ease-in-out infinite color-change;
+   
+  }
+  
+  @keyframes color-change {
+    0% {
+      background-color: gold;
+    }
+    20% {
+     
+      background-color: teal;
+    }
+    40% {
+      background-color: violet;
+    }
+    60% {
+      background-color: indianred;
+    }
+    80% {
+      background-color: teal;
+    }
+    100% {
+      background-color: green;
+    }
+  }
+
+body #userName{
+    animation: 10000ms ease-in-out infinite color-change;
+    Font: 1.5em bold;
+    border-color:#fff;
+    width: 180px;
+    padding: 10px;
+    display: flex;
+    flex-flow: row wrap;  
+    justify-content: center; 
+    align-items: center;  
+    margin: auto;
+}
+
+      
+body #help{
+    Font: 1.2em bold;
+    border-color:#fff;
+    width: 180px;
+    padding: 10px;
+    display: flex;
+    flex-flow: row wrap;  
+    justify-content: center; 
+    align-items: center;  
+    margin: auto;
+
+  }
+
+body #inputName{
+    display: block;
+    font-size: 20px;
+    height: 50px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+  }
+
+table tr td{
+   
+    border-collapse: collapse;
+    text-align: center;
+    padding: 25px;
+  }
+  
+table:first-child tr {
+    font-size: 1.5em;
+  }
+
+  footer {
+    background: #FFFACD; /*LemonChiffon as highlight colour */
+    margin: 15px 3px;
+    padding: 7px;
+    border: 2px ridge; 
+    align-items: bottom;  
+    text-align: center;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+  }
+
+
+  

@@ -1,13 +1,31 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <title></title>
-  </head>
-  <body>
-    <form class="" action="../../create" method="post">
-      Name: <input type="text" name="name" value=""><br>
-      <input type="submit" value="Create Room">
-    </form>
-  </body>
+
+<head>
+  <meta charset="utf-8">
+  <title></title>
+</head>
+
+<body>
+  <form action="" onSubmit="newRoom()" method="post">
+    Name: <input type="text" id="name" name="name" value="" required><br>
+    <input type="submit" value="Create Room">
+  </form>
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
+  <script>
+    var socket = io()
+    function newRoom() {
+      socket.emit('createNewRoom', "hi")
+      return false
+    }
+
+    //Get md5 hash from the server :: data
+    socket.on("newRoomLink", (data) => {
+      location.replace(`http://localhost:${port}?room=${data}`)
+    })
+  </script>
+</body>
+
 </html>

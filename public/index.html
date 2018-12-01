@@ -22,31 +22,43 @@
   <br><br>
   <div class="container">
     <table>
-  		<tr>
-  			<td> <button type="button" name="button" id="0" onclick="myFunction0()"></button> </td>
-  			<td class="vertical"> <button type="button" name="button" id="1" onclick="myFunction1()"></button> </td>
-  			<td> <button type="button" name="button" id="2" onclick="myFunction2()"></button> </td>
-  		</tr>
+      <tr>
+        <td> <button type="button" name="button" id="0" onclick="myFunction0()"></button> </td>
+        <td class="vertical"> <button type="button" name="button" id="1" onclick="myFunction1()"></button> </td>
+        <td> <button type="button" name="button" id="2" onclick="myFunction2()"></button> </td>
+      </tr>
 
-  		<tr>
-  			<td class="horizontal"> <button type="button" name="button" id="3" onclick="myFunction3()"></button> </td>
-  			<td class="vertical horizontal"> <button type="button" name="button" id="4" onclick="myFunction4()"></button> </td>
-  			<td class="horizontal"> <button type="button" name="button" id="5" onclick="myFunction5()"></button> </td>
-  		</tr>
+      <tr>
+        <td class="horizontal"> <button type="button" name="button" id="3" onclick="myFunction3()"></button> </td>
+        <td class="vertical horizontal"> <button type="button" name="button" id="4" onclick="myFunction4()"></button>
+        </td>
+        <td class="horizontal"> <button type="button" name="button" id="5" onclick="myFunction5()"></button> </td>
+      </tr>
 
-  		<tr>
-  			<td> <button type="button" name="button" id="6" onclick="myFunction6()"></button> </td>
-  			<td class="vertical"> <button type="button" name="button" id="7" onclick="myFunction7()"></button> </td>
-  			<td> <button type="button" name="button" id="8" onclick="myFunction8()"></button> </td>
-  		</tr>
-  	</table>
+      <tr>
+        <td> <button type="button" name="button" id="6" onclick="myFunction6()"></button> </td>
+        <td class="vertical"> <button type="button" name="button" id="7" onclick="myFunction7()"></button> </td>
+        <td> <button type="button" name="button" id="8" onclick="myFunction8()"></button> </td>
+      </tr>
+    </table>
   </div>
 
+  <h1 id="temp" hidden>Hey there! The other socket is connected</h1>
+  
   <script src="/socket.io/socket.io.js"></script>
   <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
   <script src="js/board.js"></script>
   <script>
+    var username = prompt("Enter your username : ")
     var socket = io();
+    const urlParams = new URLSearchParams(window.location.search);
+    const roomHash = urlParams.get('room');
+
+    socket.emit("joinRoom",roomHash);
+    
+    socket.on('connected',() => {
+      document.getElementById("temp").hidden = false
+    })
   </script>
 </body>
 

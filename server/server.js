@@ -4,6 +4,7 @@ const express = require('./config/headers').express
 const port = process.env.PORT || 3000;
 var path = require('path')
 
+var socketManager = require('./controllers/socketManager')
 app.use('/',express.static(path.join(__dirname,'public')))
 
 server.listen(port,() => {

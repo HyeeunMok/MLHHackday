@@ -1,0 +1,13 @@
+// main obj
+{
+	Rooms: [{room obj}]
+
+}
+
+//room obj
+{
+	id: "",
+	p1 = {name: "", id: ""},
+	p2 = {name: "", id: ""},
+	board = [0,0,0,0,0,0,0,0,0,0]
+}

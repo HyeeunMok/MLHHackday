@@ -3,6 +3,16 @@ const server = require('./config/headers').server
 const express = require('./config/headers').express
 const port = process.env.PORT || 3000;
 var path = require('path')
+
+var rooms = [];
+/*  json format room
+{
+  id: 1 ,
+  players: [{id: 1, name: "name"}],
+  hash: ""
+}
+*/
+
 var bodyParser = require('body-parser')
 var socketManager = require('./controllers/socketManager')
 

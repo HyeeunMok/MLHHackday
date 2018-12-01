@@ -11,6 +11,13 @@ obj.x */
 
 var shape = obj["shape"];
 
+function disableButtons(boolean){
+  let buttons = document.getElementsByTagName("button");
+  for(let i = 0; i < buttons.length;i++){
+    buttons[i].disabled = boolean ;
+  }
+}
+
 function shapeTurn() {
   if (shape == "X") {
     shape = "O";

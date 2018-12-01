@@ -1,7 +1,15 @@
-var x = "X";
-var o = "O";
+var obj = { "x" : 0, "y" : 2, "shape": "X"};
 
-var shape = "X";
+var x = obj["x"];
+var y = obj["y"];
+/* {
+  x: 1,
+  y: 1,
+  symbol: "x"
+}
+obj.x */
+
+var shape = obj["shape"];
 
 function shapeTurn() {
   if (shape == "X") {
@@ -10,6 +18,36 @@ function shapeTurn() {
     shape = "X";
   }
   return shape;
+}
+
+function cordinateChecker() {
+  if (x == 0 && y == 0) {
+    myFunction0();
+  }
+  else if (x == 0 && y == 1) {
+    myFunction1();
+  }
+  else if (x == 0 && y == 2) {
+    myFunction2();
+  }
+  else if (x == 1 && y == 0) {
+    myFunction3();
+  }
+  else if (x == 1 && y == 1) {
+    myFunction4();
+  }
+  else if (x == 1 && y == 2) {
+    myFunction5();
+  }
+  else if (x == 2 && y == 0) {
+    myFunction6();
+  }
+  else if (x == 2 && y == 1) {
+    myFunction7();
+  }
+  else if (x == 2 && y == 2) {
+    myFunction8();
+  }
 }
 
 

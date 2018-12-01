@@ -23,27 +23,28 @@
   <div class="container">
     <table>
   		<tr>
-  			<td> <button type="button" name="button"></button> </td>
-  			<td class="vertical"></td>
-  			<td></td>
+  			<td> <button type="button" name="button" id="0" onclick="test()"></button> </td>
+  			<td class="vertical"> <button type="button" name="button" id="1"></button> </td>
+  			<td> <button type="button" name="button" id="2"></button> </td>
   		</tr>
 
   		<tr>
-  			<td class="horizontal"></td>
-  			<td class="vertical horizontal"></td>
-  			<td class="horizontal"></td>
+  			<td class="horizontal"> <button type="button" name="button" id="3"></button> </td>
+  			<td class="vertical horizontal"> <button type="button" name="button" id="4"></button> </td>
+  			<td class="horizontal"> <button type="button" name="button" id="5"></button> </td>
   		</tr>
 
   		<tr>
-  			<td></td>
-  			<td class="vertical"></td>
-  			<td></td>
+  			<td> <button type="button" name="button" id="6"></button> </td>
+  			<td class="vertical"> <button type="button" name="button" id="7"></button> </td>
+  			<td> <button type="button" name="button" id="8"></button> </td>
   		</tr>
   	</table>
   </div>
 
   <script src="/socket.io/socket.io.js"></script>
   <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
+  <script src="js/board.js"></script>
   <script>
     var socket = io();
   </script>

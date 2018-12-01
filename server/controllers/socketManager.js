@@ -24,7 +24,9 @@ exports.new_socket_conn = io.on('connection', (socket) => {
     })
 
 
-    socket.on('joinRoom', (roomHash) => {
+    socket.on('joinRoom', (roomObj) => {
+        roomHash = roomObj.id
+        username = roomObj.username
         socket.join(roomHash)
         roomid = roomHash
         
@@ -39,6 +41,7 @@ exports.new_socket_conn = io.on('connection', (socket) => {
             mainObj.rooms.forEach( (room,i) => {
                 if (room.id==roomHash){
                     room.p1 = socket.id
+                    room.name1 = username
                     console.log(room.p1)
                 }
               
@@ -48,18 +51,14 @@ exports.new_socket_conn = io.on('connection', (socket) => {
             mainObj.rooms.forEach( (room,i) => {
                 if (room.id==roomHash){
                     room.p2 = socket.id
-                    console.log(room)
+                    room.name2 = username
+                    socket.to(roomHash).emit('updateName', room.name1)
                 }
               
             })
         }
         console.log(mainObj)
-        // console.log("P1 : " + p1)
-        // console.log("P2 : " + p2)
-
-        // console.log("Clients: "+clients)
-        // console.log("numClients : "+numClients)
-        socket.to(roomHash).emit('connected', 'hi')
+        socket.broadcast.to(roomHash).emit('updateName', username)
     })
 
     socket.on('updateCoord', (obj) => {

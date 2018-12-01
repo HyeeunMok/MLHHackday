@@ -28,7 +28,7 @@
           <h1>Nickname</h1>
         </div>
         <div class="row d-flex justify-content-center">
-          <h4>Andy</h4>
+          <h4 id="p1">Andy</h4>
         </div>
         <br><br>
         <div class="row d-flex justify-content-center">
@@ -39,7 +39,7 @@
           <h1>Opponent</h1>
         </div>
         <div class="row d-flex justify-content-center">
-          <h4>Eddy</h4>
+          <h4 id="p2">Anonymous</h4>
         </div>
       </div>
       <div class="col-sm-8">
@@ -105,15 +105,17 @@
   <script>
     var username = prompt("Enter your username : ")
     var socket = io();
-
+    document.getElementById("p1").innerHTML = username
     const urlParams = new URLSearchParams(window.location.search);
     const roomHash = urlParams.get('room');
 
-    socket.emit("joinRoom", roomHash);
+    socket.emit("joinRoom", {"id":roomHash,"username" : username});
 
-    socket.on('connected', () => {
-      document.getElementById("temp").hidden = false
+    socket.on('updateName', (data) => {
+      document.getElementById("p2").innerHTML = data
     })
+
+    
   </script>
   <script src="js/board.js"></script>
 </body>

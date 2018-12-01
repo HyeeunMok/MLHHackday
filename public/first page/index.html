@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<!--
+Local Hack Day Intro page html
+-->
+	<title>Multiple User Game Intro</title>
+	<meta charset="utf-8">
+	<meta name="author" content="Hyunsoo Hwang">
+	<link rel="stylesheet" type="text/css" href="css/introCSS.css">
+</head>
+
+
+<body>
+	<table align="center">
+		<tr>
+			<td></td>
+			<td>Welcome!</td>
+			<td></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<form>
+					<p>
+						<button type="button" name="button" onclick="newRoom()">Create Room</button>
+					</p>
+				</form>
+			</td>
+			<td></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<label for="help">
+					<a href="help.html" target="_blank">
+						<input type="submit" id="help" name="btnHelp" value="Help">
+					</a>
+				</label><br>
+			</td>
+			<td></td>
+		</tr>
+	</table>
+
+	<footer>
+		<address>Local Hack Day, Dec.1st 2018&nbsp;&copy; Hyunsoo Hwang,
+			Sraavan Sridhar,
+			Jamie Lustig,
+			Eddy Jo,
+			Andy Le,
+			Gyeongju Ko [Sheridan College]
+		</address>
+	</footer>
+	<script src="/socket.io/socket.io.js"></script>
+	<script src="https://code.jquery.com/jquery-1.11.1.js"></script>
+	<script>
+		var socket = io()
+
+		function newRoom() {
+			socket.emit('createNewRoom', "hi")
+		}
+
+		//Get md5 hash from the server :: data
+		socket.on("newRoomLink", (data) => {
+			location.replace(`http://localhost:3000?room=${data}`)
+		})
+	</script>
+
+</body>

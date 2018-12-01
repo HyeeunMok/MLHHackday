@@ -82,18 +82,29 @@
   		</tr>
 
   		<tr>
-  			<td> <button class="border-left-0 border-bottom-0 border-primary" type="button" name="button" id="6" onclick="myFunction6()"></button> </td>
-  			<td> <button class="border-bottom-0 border-primary" type="button" name="button" id="7" onclick="myFunction7()"></button> </td>
-  			<td> <button class="border-right-0 border-bottom-0 border-primary" type="button" name="button" id="8" onclick="myFunction8()"></button> </td>
+  			<td> <button class="border-left-0 border-bottom-0 border-primary" type="button" name="button" id="6" onclick="cordinateChecker()"></button> </td>
+  			<td> <button class="border-bottom-0 border-primary" type="button" name="button" id="7" onclick="cordinateChecker()"></button> </td>
+  			<td> <button class="border-right-0 border-bottom-0 border-primary" type="button" name="button" id="8" onclick="cordinateChecker()"></button> </td>
   		</tr>
   	</table>
   </div> -->
 
+  <h1 id="temp" hidden>Hey there! The other socket is connected</h1>
+  
   <script src="/socket.io/socket.io.js"></script>
   <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
   <script src="js/board.js"></script>
   <script>
+    var username = prompt("Enter your username : ")
     var socket = io();
+    const urlParams = new URLSearchParams(window.location.search);
+    const roomHash = urlParams.get('room');
+
+    socket.emit("joinRoom",roomHash);
+    
+    socket.on('connected',() => {
+      document.getElementById("temp").hidden = false
+    })
   </script>
 </body>
 

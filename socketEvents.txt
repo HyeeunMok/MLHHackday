@@ -1,0 +1,11 @@
+Rooms:
+
+------------------------------Client Side-----------------------
+//To Create a new Room
+emit :: createNewRoom
+
+//To get the link of the new Room
+on :: newRoomLink
+
+//To join a Room
+emit :: joinRoom

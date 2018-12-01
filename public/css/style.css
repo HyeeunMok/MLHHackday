@@ -7,8 +7,8 @@ table {
 }
 
 td {
-  width: 100px;
-  height: 100px;
+  width: 20vh;
+  height: 20vh;
 }
 
 td:hover {

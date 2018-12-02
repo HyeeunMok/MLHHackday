@@ -109,13 +109,17 @@
     const urlParams = new URLSearchParams(window.location.search);
     const roomHash = urlParams.get('room');
 
-    socket.emit("joinRoom", {"id":roomHash,"username" : username});
+    socket.emit("joinRoom", { "id": roomHash, "username": username });
 
     socket.on('updateName', (data) => {
       document.getElementById("p2").innerHTML = data
+
+      socket.on('result', (msg) => {
+        alert(msg);
+      })
     })
 
-    
+
   </script>
   <script src="js/board.js"></script>
 </body>

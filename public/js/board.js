@@ -71,7 +71,7 @@ function coordinateChecker(x, y) {
 
 function myFunction0() {
   if (document.getElementById("0").innerHTML.length == 0) {
-    socket.emit('updateCoord', { "x": 0, "y": 0 })
+    socket.emit('updateCoord', { "x": 0, "y": 0, "i": 0})
     document.getElementById("0").innerHTML = shapeTurn();
     disableButtons(true)
     console.log("Function0 is called")
@@ -81,7 +81,7 @@ function myFunction0() {
 
 function myFunction1() {
   if (document.getElementById("1").innerHTML.length == 0) {
-    socket.emit('updateCoord', { "x": 0, "y": 1 })
+    socket.emit('updateCoord', { "x": 0, "y": 1, "i": 1 })
     document.getElementById("1").innerHTML = shapeTurn();
     disableButtons(true)
     document.getElementById("1").disabled = true;
@@ -90,7 +90,7 @@ function myFunction1() {
 
 function myFunction2() {
   if (document.getElementById("2").innerHTML.length == 0) {
-    socket.emit('updateCoord', { "x": 0, "y": 2 })
+    socket.emit('updateCoord', { "x": 0, "y": 2, "i": 2 })
     disableButtons(true)
     document.getElementById("2").innerHTML = shapeTurn();
     document.getElementById("2").disabled = true;
@@ -99,7 +99,7 @@ function myFunction2() {
 
 function myFunction3() {
   if (document.getElementById("3").innerHTML.length == 0) {
-    socket.emit('updateCoord', { "x": 1, "y": 0 })
+    socket.emit('updateCoord', { "x": 1, "y": 0, "i": 3 })
     disableButtons(true)
     document.getElementById("3").innerHTML = shapeTurn();
     document.getElementById("3").disabled = true;
@@ -108,7 +108,7 @@ function myFunction3() {
 
 function myFunction4() {
   if (document.getElementById("4").innerHTML.length == 0) {
-    socket.emit('updateCoord', { "x": 1, "y": 1 })
+    socket.emit('updateCoord', { "x": 1, "y": 1, "i": 4 })
     disableButtons(true)
     document.getElementById("4").innerHTML = shapeTurn();
     document.getElementById("4").disabled = true;
@@ -117,7 +117,7 @@ function myFunction4() {
 
 function myFunction5() {
   if (document.getElementById("5").innerHTML.length == 0) {
-    socket.emit('updateCoord', { "x": 1, "y": 2 })
+    socket.emit('updateCoord', { "x": 1, "y": 2, "i": 5 })
     disableButtons(true)
     document.getElementById("5").innerHTML = shapeTurn();
     document.getElementById("5").disabled = true;
@@ -126,7 +126,7 @@ function myFunction5() {
 
 function myFunction6() {
   if (document.getElementById("6").innerHTML.length == 0) {
-    socket.emit('updateCoord', { "x": 2, "y": 0 })
+    socket.emit('updateCoord', { "x": 2, "y": 0, "i": 6 })
     disableButtons(true)
     document.getElementById("6").innerHTML = shapeTurn();
     document.getElementById("6").disabled = true;
@@ -135,7 +135,7 @@ function myFunction6() {
 
 function myFunction7() {
   if (document.getElementById("7").innerHTML.length == 0) {
-    socket.emit('updateCoord', { "x": 2, "y": 1 })
+    socket.emit('updateCoord', { "x": 2, "y": 1, "i": 7 })
     disableButtons(true)
     document.getElementById("7").innerHTML = shapeTurn();
     document.getElementById("7").disabled = true;
@@ -144,7 +144,7 @@ function myFunction7() {
 
 function myFunction8() {
   if (document.getElementById("8").innerHTML.length == 0) {
-    socket.emit('updateCoord', { "x": 2, "y": 2 })
+    socket.emit('updateCoord', { "x": 2, "y": 2, "i": 8 })
     disableButtons(true)
     document.getElementById("8").innerHTML = shapeTurn();
     document.getElementById("8").disabled = true;

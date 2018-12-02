@@ -8,78 +8,6 @@ var curmd5 = "";
 var mainObj = {}
 mainObj.rooms = []
 
-function checkWin(room){
-  let output = {status: "null"};
-  let board = room.board;
-  // horizontal matches
-  if(board[0] != 0 && board[0] === board[1] && board[1] === board[2]){
-    if(board[0] == 1){
-      output.winner = room.p1;
-    }else{
-      output.winner = room.p2;
-    }
-    output.status = "win";
-  }else if(board[3] != 0 && board[3] === board[4] && board[4] === board[5]){
-    if(board[0] == 1){
-      output.winner = room.p1;
-    }else{
-      output.winner = room.p2;
-    }
-    output.status = "win";
-  }else if(board[6] != 0 && board[6] === board[7] && board[7] === board[8]){
-    if(board[0] == 1){
-      output.winner = room.p1;
-    }else{
-      output.winner = room.p2;
-    }
-    output.status = "win";
-  }
-  //vertical matches
-  else if(board[0] != 0 && board[0] === board[3] && board[3] === board[6]){
-    if(board[0] == 1){
-      output.winner = room.p1;
-    }else{
-      output.winner = room.p2;
-    }
-    output.status = "win";
-  }else if(board[1] != 0 && board[1] === board[4] && board[4] === board[7]){
-    if(board[0] == 1){
-      output.winner = room.p1;
-    }else{
-      output.winner = room.p2;
-    }
-    output.status = "win";
-  }else if(board[2] != 0 && board[2] === board[5] && board[5] === board[8]){
-    if(board[0] == 1){
-      output.winner = room.p1;
-    }else{
-      output.winner = room.p2;
-    }
-    output.status = "win";
-  }
-  //diagonal matches
-  else if(board[0] != 0 && board[0] === board[4] && board[4] === board[8]){
-    if(board[0] == 1){
-      output.winner = room.p1;
-    }else{
-      output.winner = room.p2;
-    }
-    output.status = "win";
-  }else if(board[2] != 0 && board[2] === board[4] && board[4] === board[6]){
-    if(board[0] == 1){
-      output.winner = room.p1;
-    }else{
-      output.winner = room.p2;
-    }
-    output.status = "win";
-  }
-
-  //tie
-  else if(board[0] != 0 && board[1] != 0 && board[2] != 0 && board[3] != 0 && board[4] != 0 && board[5] != 0 && board[6] != 0 && board[7] != 0 && board[8] != 0){
-    output.status = "tie"
-  }
-  return output;
-}
 
 exports.new_socket_conn = io.on('connection', (socket) => {
     console.log(`${++count} user(s) connected`)
@@ -89,6 +17,9 @@ exports.new_socket_conn = io.on('connection', (socket) => {
     var p1 = ""  //Socket id of first player
     var p2 = ""  //Socket id of second player
     var roomid = ""
+
+    var roomObject = ""     
+
     socket.on('createNewRoom', () => {
         curmd5 = md5(++numRooms)
         socket.emit('newRoomLink', curmd5);
@@ -113,6 +44,7 @@ exports.new_socket_conn = io.on('connection', (socket) => {
             // p1 = socket.id
             mainObj.rooms.forEach( (room,i) => {
                 if (room.id==roomHash){
+                    roomObject = room
                     room.p1 = socket.id
                     room.name1 = username
                     console.log(room.p1)
@@ -135,14 +67,26 @@ exports.new_socket_conn = io.on('connection', (socket) => {
     })
 
     socket.on('updateCoord', (obj) => {
+        mainObj.rooms.forEach( ( room,i) => {
+            if (room.id==roomHash){
+                roomObject = room
+            }
+        })
 
-        console.log("Socket ID" + socket.id)
-        if (socket.id == p1) {
-            obj.shape = "X"
-        } else {
-            obj.shape = "O"
+        if (roomObject.p1 == socket.id){
+            console.log(roomObject)
+            roomObject.board[obj.i] = 1
+        }else{
+            console.log(roomObject.board)
+            console.log(obj.i)
+            roomObject.board[obj.i] = 2
         }
-        console.log(obj)
+        var result = checkWin(roomObject)
+        if (result.status=="null"){
+
+        }else if(result.status=="win"){
+            socket.to(roomid).emit('result',`${result.winner} is the winner`)
+        }
         socket.broadcast.to(roomid).emit('updateClientCoord', obj)
     })
 
@@ -151,3 +95,77 @@ exports.new_socket_conn = io.on('connection', (socket) => {
         console.log(`${count} user(s) connected`)
     })
 })
+
+function checkWin(room){
+    let output = {status: "null"};
+    let board = room.board;
+    // horizontal matches
+    if(board[0] != 0 && board[0] === board[1] && board[1] === board[2]){
+      if(board[0] == 1){
+        output.winner = room.name1;
+      }else{
+        output.winner = room.name2;
+      }
+      output.status = "win";
+    }else if(board[3] != 0 && board[3] === board[4] && board[4] === board[5]){
+      if(board[0] == 1){
+        output.winner = room.name1;
+      }else{
+        output.winner = room.name2;
+      }
+      output.status = "win";
+    }else if(board[6] != 0 && board[6] === board[7] && board[7] === board[8]){
+      if(board[0] == 1){
+        output.winner = room.name1;
+      }else{
+        output.winner = room.name2;
+      }
+      output.status = "win";
+    }
+    //vertical matches
+    else if(board[0] != 0 && board[0] === board[3] && board[3] === board[6]){
+      if(board[0] == 1){
+        output.winner = room.name1;
+      }else{
+        output.winner = room.name2;
+      }
+      output.status = "win";
+    }else if(board[1] != 0 && board[1] === board[4] && board[4] === board[7]){
+      if(board[0] == 1){
+        output.winner = room.name1;
+      }else{
+        output.winner = room.name2;
+      }
+      output.status = "win";
+    }else if(board[2] != 0 && board[2] === board[5] && board[5] === board[8]){
+      if(board[0] == 1){
+        output.winner = room.name1;
+      }else{
+        output.winner = room.name2;
+      }
+      output.status = "win";
+    }
+    //diagonal matches
+    else if(board[0] != 0 && board[0] === board[4] && board[4] === board[8]){
+      if(board[0] == 1){
+        output.winner = room.name1;
+      }else{
+        output.winner = room.name2;
+      }
+      output.status = "win";
+    }else if(board[2] != 0 && board[2] === board[4] && board[4] === board[6]){
+      if(board[0] == 1){
+        output.winner = room.name1;
+      }else{
+        output.winner = room.name2;
+      }
+      output.status = "win";
+    }
+  
+    //tie
+    else if(board[0] != 0 && board[1] != 0 && board[2] != 0 && board[3] != 0 && board[4] != 0 && board[5] != 0 && board[6] != 0 && board[7] != 0 && board[8] != 0){
+      output.status = "tie"
+    }
+    return output;
+  }
+  

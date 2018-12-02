@@ -1,6 +1,36 @@
 // var obj = { "x" : 0, "y" : 2, "shape": "X"};
 
 var obj = {}
+var board = [0,0,0,0,0,0,0,0]
+
+function getBoards(){
+  
+  var buttons = document.getElementsByTagName("button");
+  for (let i=0;i<buttons.length;i++){
+    element = buttons[i]
+    if (element.innerHTML.length>0){
+      if (element.innerHTML=='X'){
+        if (document.getElementById("p2")=="Anonymous"){
+          board[i] = 1
+        }else{
+          board[i] = 2
+        }
+      }else{
+        if (document.getElementById("p2")=="Anonymous"){
+          board[i] = 2
+        }else{
+          board[i] = 1
+        }
+      }
+    }
+  }
+  var result = checkWin(board)
+  if (result.status=="win"){
+    alert(result.winner+" won!")
+  }else if (result.status == "tie"){
+    alert("It's a tie!")
+  }
+}
 
 socket.on('updateClientCoord', (data) => {
   obj = data
@@ -8,6 +38,7 @@ socket.on('updateClientCoord', (data) => {
   var y = obj["y"];
   coordinateChecker(x, y)
   disableButtons(false)
+  getBoards()
   /* {
     x: 1,
     y: 1,
@@ -149,4 +180,77 @@ function myFunction8() {
     document.getElementById("8").innerHTML = shapeTurn();
     document.getElementById("8").disabled = true;
   }
+}
+
+function checkWin(board){
+  let output = {};
+   
+  // horizontal matches
+  if(board[0] != 0 && board[0] === board[1] && board[1] === board[2]){
+    if(board[0] == 2){
+      output.winner = "Player 1"
+    }else{
+      output.winner = "Player 2"
+    }
+    output.status = "win";
+  }else if(board[3] != 0 && board[3] === board[4] && board[4] === board[5]){
+    if(board[3] == 2){
+      output.winner = "Player 1"
+    }else{
+      output.winner = "Player 2"
+    }
+    output.status = "win";
+  }else if(board[6] != 0 && board[6] === board[7] && board[7] === board[8]){
+    if(board[6] == 2){
+      output.winner = "Player 1"
+    }else{
+      output.winner = "Player 2"
+    }
+    output.status = "win";
+  }
+  //vertical matches
+  else if(board[0] != 0 && board[0] === board[3] && board[3] === board[6]){
+    if(board[0] == 2){
+      output.winner = "Player 1"
+    }else{
+      output.winner = "Player 2"
+    }
+    output.status = "win";
+  }else if(board[1] != 0 && board[1] === board[4] && board[4] === board[7]){
+    if(board[1] == 2){
+      output.winner = "Player 1"
+    }else{
+      output.winner = "Player 2"
+    }
+    output.status = "win";
+  }else if(board[2] != 0 && board[2] === board[5] && board[5] === board[8]){
+    if(board[2] == 2){
+      output.winner = "Player 1"
+    }else{
+      output.winner = "Player 2"
+    }
+    output.status = "win";
+  }
+  //diagonal matches
+  else if(board[0] != 0 && board[0] === board[4] && board[4] === board[8]){
+    if(board[0] == 2){
+      output.winner = "Player 1"
+    }else{
+      output.winner = "Player 2"
+    }
+    output.status = "win";
+  }else if(board[2] != 0 && board[2] === board[4] && board[4] === board[6]){
+    if(board[2] == 2){
+      output.winner = "Player 1"
+    }else{
+      output.winner = "Player 2"
+    }
+    output.status = "win";
+  }
+
+  //tie
+  else if(board[0] != 0 && board[1] != 0 && board[2] != 0 && board[3] != 0 && board[4] != 0 && board[5] != 0 && board[6] != 0 && board[7] != 0 && board[8] != 0){
+    output.status = "tie"
+  }
+  return output;
 }

@@ -14,7 +14,7 @@ Local Hack Day Intro page html
 	<title>Multiple User Game Intro</title>
 	<meta charset="utf-8">
 	<meta name="author" content="Hyunsoo Hwang">
-	<link rel="stylesheet" type="text/css" href="css/introCSS.css">
+	<link rel="stylesheet" type="text/css" href="css/home.css">
 </head>
 
 
@@ -69,7 +69,7 @@ Local Hack Day Intro page html
 
 		//Get md5 hash from the server :: data
 		socket.on("newRoomLink", (data) => {
-			location.replace(`http://localhost:3000?room=${data}`)
+			location.replace(`/?room=${data}`)
 		})
 	</script>
 
